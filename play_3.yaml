@@ -1,0 +1,11 @@
+---
+-
+  hosts: all
+
+  tasks:
+    - name: Print Hello
+      debug:
+        msg: "Hello there!"
+
+    - name: Run kubernetes command
+      command: kubectl get pods -A | grep healthbeat
