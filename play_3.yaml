@@ -8,4 +8,4 @@
         msg: "Hello there!"
 
     - name: Run kubernetes command
-      command: "/usr/local/bin/kubectl get pods -A | grep healthbeat"
+      shell: "/usr/local/bin/kubectl get pods -A | grep healthbeat"
