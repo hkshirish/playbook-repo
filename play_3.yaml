@@ -8,4 +8,7 @@
         msg: "Hello there!"
 
     - name: Run kubernetes command
+      register: grep_output
       shell: "/usr/local/bin/kubectl get pods -A | grep healthbeat"
+    - debug:
+        var: grep_output.stdout_lines
