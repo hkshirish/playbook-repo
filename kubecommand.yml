@@ -1,0 +1,11 @@
+  tasks:
+    - name: kubernetes command
+      shell: "date"
+      register:  grep_output
+    - debug:
+        var: grep_output.stdout_lines
+    - name: kubernetes command 2
+      shell: "bash /home/vunet/test-kube.sh"
+      register:  grep_output2
+    - debug:
+        var: grep_output2.stdout_lines
