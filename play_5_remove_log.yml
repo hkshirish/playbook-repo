@@ -1,14 +1,14 @@
 ---
--
-  hosts: all
-
+- hosts: all
   tasks:
-    - name: Print Hello
-      debug:
-        msg: "Login successful!"
+  - name: Ansible delete file glob
+    find:
+      paths: /data2/dest/logs
+      patterns: "*.log"
+    register: files_to_delete
 
-    - name: delete log files
-      register: grep_output
-      shell: "rm /home/vunet/shirish/logs/log*"
-    - debug:
-        var: grep_output.stdout_lines
+  - name: Ansible remove file glob
+    file:
+      path: "{{ item.path }}"
+      state: absent
+    with_items: "{{ files_to_delete.files }}"
