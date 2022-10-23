@@ -6,7 +6,7 @@
     file_name2: "file-name"
   tasks:
     - name: 'print message'
-      shell: stat {{file_name1|quote }} && echo success || echo fail
+      shell: touch {{file_name1|quote }} && echo success || echo fail
       register: task1
     - debug:
         var: task1.stdout_lines
