@@ -1,0 +1,19 @@
+---
+- name: command line arguments demo
+  hosts: all
+  vars:
+    file_name1: "file-name1"
+    file_name2: "file-name2"
+  tasks:
+    - name: 'print message'
+      shell: rm {{file_name1|quote }}/ && echo success || echo fail
+      register: task1
+    - debug:
+        var: task1.stdout_lines
+    - name: 'create file from args'
+      shell: rm {{file_name2|quote }} && echo success || echo fail
+      register: task2
+    - debug:
+        var: task2.stdout_lines
+      #ansible.builtin.debug:
+      #  msg: "fruit is {{ file_name }}"
