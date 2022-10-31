@@ -1,8 +1,21 @@
 ---
--
-  hosts: all
-  
+- hosts: all
+  become: vunet
+  #become_user: vunet
+  become_method: su
+  vars:
+  - path: "/data2/dest1/"
   tasks:
-    - name: Print Hello
-      debug:
-        msg: "Hello there!"
+  - name: Ansible delete file glob
+    find:
+      paths: "{{ path }}"
+      patterns: "sample.log.*"
+    register: files_to_delete
+  - name: Print log file names
+    debug:
+      msg: "{{ files_to_delete.files }}"
+  - name: Ansible remove file glob
+    file:
+      path: "{{ item.path }}"
+      state: absent
+    with_items: "{{ files_to_delete.files }}"
