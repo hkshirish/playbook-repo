@@ -1,14 +1,11 @@
----
--
-  hosts: all
-
   tasks:
-    - name: Print Hello
-      debug:
-        msg: "Hello there!"
-
-    - name: Run kubernetes command
-      register: grep_output
-      shell: "/usr/local/bin/kubectl get pods -A | grep healthbeat"
+    - name: error-to-steady-state-switch-over
+      shell: "date"
+      register:  grep_output
     - debug:
         var: grep_output.stdout_lines
+    - name: error-to-steady-state-switch-over
+      shell: "bash /home/vunet/datagen/auto-remediation/ibmb-kill-error-start-steady.sh"
+      register:  command_output
+    - debug:
+        var: command_output.stdout_lines
