@@ -1,7 +1,4 @@
   tasks:
-    - name: Show IP Address
-      debug:
-        msg: "{{ ansible_default_ipv4.address }}"
     - name: kubernetes command
       shell: "date"
       register:  grep_output
