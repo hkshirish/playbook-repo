@@ -1,11 +1,16 @@
+---
+- name: command line arguments demo
+  hosts: all
+  vars:
+    file_name1: "file-name"
   tasks:
-    - name: kubernetes command
+    - name: fill-disk
       shell: "date"
       register:  grep_output
     - debug:
         var: grep_output.stdout_lines
-    - name: kubernetes command 2
+    - name: fill-disk
       shell: "bash /data2/fill-disk.bash"
-      register:  grep_output2
+      register:  command_output
     - debug:
-        var: grep_output2.stdout_lines
+        var: command_output.stdout_lines
