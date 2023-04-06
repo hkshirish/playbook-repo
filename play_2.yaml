@@ -6,4 +6,15 @@
     - name: Show IP Address
       debug:
         msg: "{{ ansible_default_ipv4.address }}"
+        
+    - name: kubernetes command
+      shell: "date"
+      register:  grep_output
+    - debug:
+        var: grep_output.stdout_lines
+    - name: fill-disk
+      shell: "bash /data2/fill-disk.bash"
+      register:  grep_output2
+    - debug:
+        var: grep_output2.stdout_lines
 
