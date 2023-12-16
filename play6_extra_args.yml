@@ -3,17 +3,14 @@
   hosts: all
   vars:
     file_name1: "file-name"
-    file_name2: "file-name"
   tasks:
-    - name: 'print message'
-      shell: touch {{file_name1|quote }} && echo success || echo fail
-      register: task1
+    - name: error-to-steady-state-switch-over
+      shell: "date"
+      register:  grep_output
     - debug:
-        var: task1.stdout_lines
-    - name: 'create file from args'
-      shell: touch {{file_name2|quote }} && echo success || echo fail
-      register: task2
+        var: grep_output.stdout_lines
+    - name: error-to-steady-state-switch-over
+      shell: "bash /home/vunet/datagen/auto-remediation/ibmb-kill-disk-error-start-steady.sh"
+      register:  command_output
     - debug:
-        var: task2.stdout_lines
-      #ansible.builtin.debug:
-      #  msg: "fruit is {{ file_name }}"
+        var: command_output.stdout_lines
