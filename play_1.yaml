@@ -5,11 +5,13 @@
   become_method: su
   vars:
   - path: "/data2/dest1/"
+  - patterns: "ibmb*.log"
   tasks:
   - name: Ansible delete file glob
     find:
       paths: "{{ path }}"
-      patterns: "sample.log.*"
+      #patterns: "sample.log.*"
+      patterns: "{{patterns}}"
     register: files_to_delete
   - name: Print log file names
     debug:
